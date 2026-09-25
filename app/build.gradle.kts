@@ -1,6 +1,13 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+
+    //Hilt
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.dagger.hilt)
+
+    //Navigation
+    alias(libs.plugins.jetbrains.kotlin.serialization)
 }
 
 android {
@@ -27,8 +34,8 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
@@ -51,4 +58,33 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
     debugImplementation(libs.androidx.compose.ui.tooling)
+
+    //hilt
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler.ksp)
+    implementation(libs.hilt.navigation.compose)
+
+    //networking
+    implementation(libs.square.retrofit2)
+    implementation(libs.square.converter.gson)
+    implementation(libs.square.okhttp3.logging.interceptor)
+    implementation(libs.gson)
+
+    //Kotlin & Coroutines
+    implementation(libs.kotlinx.collections.immutable)
+    implementation(libs.coil.compose)
+
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
+    //Storage & Database
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler.ksp)
+
+    //Pagination
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
+    implementation(libs.room.paging)
 }

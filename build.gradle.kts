@@ -2,4 +2,11 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.compose) apply false
+
+    //Hilt
+    alias(libs.plugins.ksp) apply false
+    alias(libs.plugins.dagger.hilt) apply false
+
+    //Navigation
+    alias(libs.plugins.jetbrains.kotlin.serialization) apply false
 }
