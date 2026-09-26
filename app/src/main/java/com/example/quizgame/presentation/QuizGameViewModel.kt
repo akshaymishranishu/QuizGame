@@ -27,7 +27,7 @@ class QuizGameViewModel @Inject constructor(
     private val _screenState = MutableStateFlow(ScreenState.empty)
     val screenState = _screenState.asStateFlow()
 
-    private val selectedAnswerId: Map<Int, Int> = emptyMap() //selected: question_id, option_id
+    private val selectedAnswerId: MutableMap<Int, Int> = mutableMapOf() //selected: question_id, option_id
 
     init {
         loadQuestions()
@@ -45,10 +45,12 @@ class QuizGameViewModel @Inject constructor(
             val isLastQuestion = state.quiz.questions.size == state.currentQuestionIndex + 1
             val currentQuestionId = state.quiz.questions[state.currentQuestionIndex].questionId
             val nextQuestionIndex = if(isLastQuestion) { state.currentQuestionIndex } else { state.currentQuestionIndex + 1 }
-            val selectedAnswerId = selectedAnswerId + (currentQuestionId to optionId)
+            selectedAnswerId[currentQuestionId] = optionId
+            Log.d("akshay_test", selectedAnswerId.toString())
 
             val score = if(isLastQuestion) {
                 val count = state.quiz.questions.count { ques ->
+                    Log.d("akshay_test", "answer: ${selectedAnswerId[ques.questionId]}, correct: ${ques.answerId}")
                     selectedAnswerId[ques.questionId] == ques.answerId
                 }
                 "You have achieved $count out of ${state.quiz.questions.size} points!"
